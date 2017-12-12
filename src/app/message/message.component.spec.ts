@@ -8,9 +8,9 @@ describe('MessageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MessageComponent ]
+      declarations: [MessageComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -21,5 +21,18 @@ describe('MessageComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  describe('#ngOnInit', () => {
+    it('should set default author', () => {
+      // given
+      component.author = undefined;
+      component.message = undefined;
+      // when
+      component.ngOnInit();
+      // then
+      expect(component.author).toEqual('John');
+      expect(component.message).toEqual('Hello world');
+    });
   });
 });

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'mcb-message',
@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MessageComponent implements OnInit {
 
+  @Input() author: string;
+  @Input() message: string;
+
   constructor() { }
 
   ngOnInit() {
+    this.author = this.author || 'John';
+    this.message = this.message || 'Hello world';
   }
 
 }
