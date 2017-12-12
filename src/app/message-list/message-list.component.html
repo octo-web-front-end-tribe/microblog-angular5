@@ -1,6 +1,7 @@
 <div class="message-list">
     <ul class="message-list__ul">
-        <mcb-message author="FLM" message="I am happy"></mcb-message>
-        <mcb-message [author]="'AJU'" [message]="'Oh really!'"></mcb-message>
+        <ng-container *ngFor="let message of messages">
+            <mcb-message [message]="message"></mcb-message>
+        </ng-container>
     </ul>
 </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Message } from '../shared/message';
 
 @Component({
   selector: 'mcb-message-list',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MessageListComponent implements OnInit {
 
+  messages: Array<Message>;
+
   constructor() { }
 
   ngOnInit() {
+    this.messages = [
+      { author: 'FLM', content: 'I am happy'},
+      { author: 'AJU', content: 'Oh really!'}
+    ];
   }
 
 }

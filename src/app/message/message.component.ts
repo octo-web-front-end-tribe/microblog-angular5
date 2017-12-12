@@ -5,16 +5,12 @@ import { Component, OnInit, Input } from '@angular/core';
   templateUrl: './message.component.html',
   styles: []
 })
-export class MessageComponent implements OnInit {
-
-  @Input() author: string;
-  @Input() message: string;
-
+export class MessageComponent implements OnInit {s
+  @Input() message;
+  
   constructor() { }
 
   ngOnInit() {
-    this.author = this.author || 'John';
-    this.message = this.message || 'Hello world';
   }
 
 }

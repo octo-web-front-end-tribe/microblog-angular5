@@ -26,4 +26,20 @@ describe('MessageListComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  describe('#ngOnInit', () => {
+    it('should set property messages with default', () => {
+      // given
+      component.messages = undefined;
+      // when
+      component.ngOnInit();
+      // then
+      expect(component.messages).toEqual([
+        { author: 'FLM', content: 'I am happy'},
+        { author: 'AJU', content: 'Oh really!'}
+      ]);
+    });
+  });
+
+
 });
