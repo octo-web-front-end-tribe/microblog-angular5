@@ -1,11 +1,13 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { MessagesStoreService } from './messages-store.service';
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 
 describe('MessagesStoreService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [MessagesStoreService]
+      providers: [MessagesStoreService],
+      imports : [HttpClientTestingModule]
     });
   });
 
@@ -13,18 +15,54 @@ describe('MessagesStoreService', () => {
     expect(service).toBeTruthy();
   }));
 
-  it('should set messages property with empty empty array', inject([MessagesStoreService], (service: MessagesStoreService) => {
-    expect(service.messages).toEqual([]);
-  }));
-
   describe('#addMessage', () => {
-    it('should be created', inject([MessagesStoreService], (service: MessagesStoreService) => {
+    it('should post message to the endpoint',
+      inject([MessagesStoreService, HttpTestingController],
+        (service: MessagesStoreService, backend: HttpTestingController) => {
       // given
-      service.messages = [];
+      const data = {
+        author : 'John',
+        content : 'Hello'
+      };
+
+      const mockedUrl = service.API_URL;
+
       // when
-      service.addMessage({ author: 'John', content: 'blabla'});
-      // then
-      expect(service.messages).toContain({ author: 'John', content: 'blabla'});
+      service.addMessage(data).subscribe(res => {
+        // then
+        expect(res).toBeTruthy();
+      });
+
+      const mockedReq = backend.expectOne({method: 'post', url : mockedUrl});
+      mockedReq.flush(data);
+      backend.verify();
     }));
   });
-});;
+
+  describe('#geMessages', () => {
+    it('should get list of messages',
+      inject([MessagesStoreService, HttpTestingController],
+        (service: MessagesStoreService, backend: HttpTestingController) => {
+      // given
+      const data = [{
+        author : 'John',
+        content : 'Hello'
+      }, {
+        author : 'John',
+        content : 'Hello2'
+      }];
+
+      const mockedUrl = service.API_URL;
+
+      // when
+      service.getMessages().subscribe(res => {
+        // then
+        expect(res).toEqual(data);
+      });
+
+      const mockedReq = backend.expectOne({method: 'get', url : mockedUrl});
+      mockedReq.flush(data);
+      backend.verify();
+    }));
+  });
+});

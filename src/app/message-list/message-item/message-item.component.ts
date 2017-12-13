@@ -5,9 +5,9 @@ import { Component, OnInit, Input } from '@angular/core';
   templateUrl: './message-item.component.html',
   styles: []
 })
-export class MessageItemComponent implements OnInit {s
+export class MessageItemComponent implements OnInit {s;
   @Input() message;
-  
+
   constructor() { }
 
   ngOnInit() {

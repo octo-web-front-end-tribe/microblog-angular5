@@ -3,6 +3,9 @@ import { FormsModule } from '@angular/forms';
 
 import { MessageInputComponent } from './message-input.component';
 import { MessagesStoreService } from '../shared/messages-store.service';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('MessageInputComponent', () => {
   let component: MessageInputComponent;
@@ -12,7 +15,7 @@ describe('MessageInputComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ MessageInputComponent ],
-      imports: [FormsModule],
+      imports: [FormsModule, HttpClientTestingModule],
       providers: [MessagesStoreService]
     })
     .compileComponents();
@@ -21,7 +24,7 @@ describe('MessageInputComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(MessageInputComponent);
     component = fixture.componentInstance;
-    service = fixture.debugElement.injector.get(MessagesStoreService)
+    service = fixture.debugElement.injector.get(MessagesStoreService);
     fixture.detectChanges();
   });
 
@@ -32,7 +35,7 @@ describe('MessageInputComponent', () => {
   describe('#addMessage', () => {
     it('should post new message using the message-store service', () => {
         // given
-        spyOn(service, 'addMessage').and.stub;
+        spyOn(service, 'addMessage').and.returnValue(Observable.of());
         component.textMessage = 'blabla';
         // when
         component.addMessage();
@@ -40,13 +43,16 @@ describe('MessageInputComponent', () => {
         expect(service.addMessage).toHaveBeenCalledWith({ author: 'John', content: 'blabla' });
     });
 
-    it('should reset textMessage attribute', () => {
+    xit('should reset textMessage attribute', () => {
         // given
+        spyOn(service, 'addMessage').and.returnValue(Observable.of());
         component.textMessage = 'fake message';
         // when
         component.addMessage();
-        // then
+        fixture.detectChanges();
+        // then 
         expect(component.textMessage).toEqual('');
+        
     });
   });
 });

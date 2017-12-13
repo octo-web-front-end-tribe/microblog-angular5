@@ -9,6 +9,7 @@ import { MessageItemComponent } from './message-list/message-item/message-item.c
 import { MessageInputComponent } from './message-input/message-input.component';
 import { FormsModule } from '@angular/forms';
 import { MessagesStoreService } from './shared/messages-store.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { MessagesStoreService } from './shared/messages-store.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule, 
+    HttpClientModule
   ],
   providers: [MessagesStoreService],
   bootstrap: [AppComponent]
