@@ -2,7 +2,7 @@ import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { MessageListComponent } from './message-list/message-list.component';
-import { MessageComponent } from './message/message.component';
+import { MessageItemComponent } from './message-item/message-item.component';
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -12,7 +12,7 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent,
         MessageListComponent,
-        MessageComponent
+        MessageItemComponent
       ],
     }).compileComponents();
   }));

@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MessageListComponent } from './message-list.component';
-import { MessageComponent } from '../message/message.component';
+import { MessageItemComponent } from '../message-item/message-item.component';
 
 describe('MessageListComponent', () => {
   let component: MessageListComponent;
@@ -11,7 +11,7 @@ describe('MessageListComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         MessageListComponent,
-        MessageComponent
+        MessageItemComponent
       ]
     })
     .compileComponents();
