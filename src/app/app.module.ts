@@ -8,6 +8,7 @@ import { MessageListComponent } from './message-list/message-list.component';
 import { MessageItemComponent } from './message-list/message-item/message-item.component';
 import { MessageInputComponent } from './message-input/message-input.component';
 import { FormsModule } from '@angular/forms';
+import { MessagesStoreService } from './shared/messages-store.service';
 
 
 @NgModule({
@@ -22,7 +23,7 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     FormsModule
   ],
-  providers: [],
+  providers: [MessagesStoreService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

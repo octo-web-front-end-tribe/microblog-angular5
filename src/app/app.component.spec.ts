@@ -5,6 +5,7 @@ import { MessageListComponent } from './message-list/message-list.component';
 import { MessageItemComponent } from './message-list/message-item/message-item.component';
 import { FormsModule } from '@angular/forms';
 import { MessageInputComponent } from './message-input/message-input.component';
+import { MessagesStoreService } from './shared/messages-store.service';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -19,6 +20,7 @@ describe('AppComponent', () => {
         MessageItemComponent,
         MessageInputComponent
       ],
+      providers: [MessagesStoreService]
     }).compileComponents();
   }));
   it('should create the app', async(() => {

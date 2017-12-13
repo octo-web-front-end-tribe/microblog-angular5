@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MessagesStoreService } from '../shared/messages-store.service';
 
 @Component({
   selector: 'mcb-message-input',
@@ -9,12 +10,17 @@ export class MessageInputComponent implements OnInit {
 
   textMessage: string;
 
-  constructor() { }
+  constructor(private messagesStoreService: MessagesStoreService) { }
 
   ngOnInit() {
   }
 
   addMessage(): void {
+    this.messagesStoreService.addMessage({
+      author: 'John', 
+      content: this.textMessage
+     });
+     this.textMessage = '';
   }
 
 }
