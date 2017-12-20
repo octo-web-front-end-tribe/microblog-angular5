@@ -12,7 +12,7 @@ export class MessageListComponent implements OnInit {
   constructor(public messagesStoreService: MessagesStoreService) { }
 
   ngOnInit() {
-    this.messagesStoreService.getMessages();
+    this.messagesStoreService.fetchMessages();
   }
 
 }

@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MessageListComponent } from './message-list.component';
 import { MessageItemComponent } from './message-item/message-item.component';
 import { MessagesStoreService } from '../shared/messages-store.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('MessageListComponent', () => {
   let component: MessageListComponent;
@@ -15,7 +16,8 @@ describe('MessageListComponent', () => {
         MessageListComponent,
         MessageItemComponent
       ],
-      providers: [MessagesStoreService]
+      providers: [MessagesStoreService],
+      imports: [HttpClientTestingModule]
     })
       .compileComponents();
   }));
@@ -34,11 +36,11 @@ describe('MessageListComponent', () => {
 
     it('should fetch messages using message-store-service', () => {
       // given
-      spyOn(service, 'getMessages').and.stub;
+      spyOn(service, 'fetchMessages').and.stub;
       // when
       component.ngOnInit();
       // then
-      expect(service.getMessages).toHaveBeenCalled();
+      expect(service.fetchMessages).toHaveBeenCalled();
     });
   });
 

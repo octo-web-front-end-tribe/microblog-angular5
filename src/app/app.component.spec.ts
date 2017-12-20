@@ -6,13 +6,15 @@ import { MessageItemComponent } from './message-list/message-item/message-item.c
 import { FormsModule } from '@angular/forms';
 import { MessageInputComponent } from './message-input/message-input.component';
 import { MessagesStoreService } from './shared/messages-store.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-        FormsModule
+        FormsModule,
+        HttpClientTestingModule
       ],
       declarations: [
         AppComponent,

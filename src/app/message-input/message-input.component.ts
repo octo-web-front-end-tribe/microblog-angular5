@@ -17,10 +17,10 @@ export class MessageInputComponent implements OnInit {
 
   addMessage(): void {
     this.messagesStoreService.addMessage({
-      author: 'John', 
+      author: 'John',
       content: this.textMessage
-     });
-     this.textMessage = '';
+    });
+    this.textMessage = '';
   }
 
 }

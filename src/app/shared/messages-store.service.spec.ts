@@ -1,12 +1,23 @@
 import { TestBed, inject } from '@angular/core/testing';
-
 import { MessagesStoreService } from './messages-store.service';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
+import { Message } from './message';
 
 describe('MessagesStoreService', () => {
+  let httpStub;
   let service: MessagesStoreService;
 
   beforeEach(() => {
-    service = new MessagesStoreService();
+    httpStub = {
+      get: () => {
+        return Observable.of([{ id: 1, content: 'hello', author: 'John' }]);
+      },
+      post: (message: Message) => {
+        return Observable.of(message);
+      }
+    };
+    service = new MessagesStoreService(httpStub);
   });
 
   it('should be created', () => {
@@ -36,9 +47,9 @@ describe('MessagesStoreService', () => {
       // given
       service.messages = [];
       // when
-      let expectedMessages = service.getMessages();
+      service.fetchMessages();
       // then
-      expect(expectedMessages).toEqual(service.messages);
+      expect(service.messages).toEqual([{ id: 1, content: 'hello', author: 'John' }]);
     });
   });
 });
