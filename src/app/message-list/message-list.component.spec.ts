@@ -2,25 +2,28 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MessageListComponent } from './message-list.component';
 import { MessageItemComponent } from './message-item/message-item.component';
+import { MessagesStoreService } from '../shared/messages-store.service';
 
 describe('MessageListComponent', () => {
   let component: MessageListComponent;
   let fixture: ComponentFixture<MessageListComponent>;
+  let service: MessagesStoreService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
         MessageListComponent,
         MessageItemComponent
-      ]
+      ],
+      providers: [MessagesStoreService]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(MessageListComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    service = fixture.debugElement.injector.get(MessagesStoreService);
   });
 
   it('should create', () => {
@@ -28,16 +31,14 @@ describe('MessageListComponent', () => {
   });
 
   describe('#ngOnInit', () => {
-    it('should set property messages with default', () => {
+
+    it('should fetch messages using message-store-service', () => {
       // given
-      component.messages = undefined;
+      spyOn(service, 'getMessages').and.stub;
       // when
       component.ngOnInit();
       // then
-      expect(component.messages).toEqual([
-        { author: 'FLM', content: 'I am happy'},
-        { author: 'AJU', content: 'Oh really!'}
-      ]);
+      expect(service.getMessages).toHaveBeenCalled();
     });
   });
 

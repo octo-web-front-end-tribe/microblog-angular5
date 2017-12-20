@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Message } from '../shared/message';
+import { MessagesStoreService } from '../shared/messages-store.service';
 
 @Component({
   selector: 'mcb-message-list',
@@ -7,16 +8,11 @@ import { Message } from '../shared/message';
   styles: []
 })
 export class MessageListComponent implements OnInit {
-
-  messages: Array<Message>;
-
-  constructor() { }
+  
+  constructor(public messagesStoreService: MessagesStoreService) { }
 
   ngOnInit() {
-    this.messages = [
-      { author: 'FLM', content: 'I am happy'},
-      { author: 'AJU', content: 'Oh really!'}
-    ];
+    this.messagesStoreService.getMessages();
   }
 
 }
