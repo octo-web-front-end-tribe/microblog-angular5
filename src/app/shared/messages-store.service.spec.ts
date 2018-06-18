@@ -1,7 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 import { MessagesStoreService } from './messages-store.service';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
+import { of } from 'rxjs';
 import { Message } from './message';
 
 describe('MessagesStoreService', () => {
@@ -11,10 +10,10 @@ describe('MessagesStoreService', () => {
   beforeEach(() => {
     httpStub = {
       get: () => {
-        return Observable.of([{ id: 1, content: 'hello', author: 'John' }]);
+        return of([{ id: 1, content: 'hello', author: 'John' }]);
       },
       post: (message: Message) => {
-        return Observable.of(message);
+        return of(message);
       }
     };
     service = new MessagesStoreService(httpStub);
